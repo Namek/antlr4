@@ -286,7 +286,7 @@ public class ParserInterpreter extends Parser {
 
 			case Transition.PRECEDENCE:
 				if (!precpred(_ctx, ((PrecedencePredicateTransition)transition).precedence)) {
-					throw new FailedPredicateException(this, String.format("precpred(_ctx, %d)", ((PrecedencePredicateTransition)transition).precedence));
+					throw new FailedPredicateException(this, "precpred(_ctx, " + ((PrecedencePredicateTransition)transition).precedence + ")");
 				}
 				break;
 

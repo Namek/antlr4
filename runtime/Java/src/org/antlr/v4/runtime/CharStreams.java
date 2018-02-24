@@ -262,7 +262,7 @@ public final class CharStreams {
 				inputSize = bufferSize;
 			} else if (inputSize > Integer.MAX_VALUE) {
 				// ByteBuffer et al don't support long sizes
-				throw new IOException(String.format("inputSize %d larger than max %d", inputSize, Integer.MAX_VALUE));
+				throw new IOException("inputSize " + inputSize + " larger than max " + Integer.MAX_VALUE);
 			}
 			CodePointBuffer.Builder codePointBufferBuilder = CodePointBuffer.builder((int) inputSize);
 			CharsetDecoder decoder = charset

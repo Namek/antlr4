@@ -13,7 +13,6 @@ import org.antlr.v4.runtime.misc.Pair;
 import java.io.InvalidClassException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -183,14 +182,14 @@ public class ATNDeserializer {
 		int p = 0;
 		int version = toInt(data[p++]);
 		if (version != SERIALIZED_VERSION) {
-			String reason = String.format(Locale.getDefault(), "Could not deserialize ATN with version %d (expected %d).", version, SERIALIZED_VERSION);
+			String reason = "Could not deserialize ATN with version " + version + " (expected " + SERIALIZED_VERSION + ").";
 			throw new UnsupportedOperationException(new InvalidClassException(ATN.class.getName(), reason));
 		}
 
 		UUID uuid = toUUID(data, p);
 		p += 8;
 		if (!SUPPORTED_UUIDS.contains(uuid)) {
-			String reason = String.format(Locale.getDefault(), "Could not deserialize ATN with UUID %s (expected %s or a legacy UUID).", uuid, SERIALIZED_UUID);
+			String reason = "Could not deserialize ATN with UUID " + uuid + " (expected " + SERIALIZED_UUID + " or a legacy UUID).";
 			throw new UnsupportedOperationException(new InvalidClassException(ATN.class.getName(), reason));
 		}
 
@@ -754,7 +753,7 @@ public class ATNDeserializer {
 			case ATNState.PLUS_LOOP_BACK : s = new PlusLoopbackState(); break;
 			case ATNState.LOOP_END : s = new LoopEndState(); break;
 			default :
-				String message = String.format(Locale.getDefault(), "The specified state type %d is not valid.", type);
+				String message = "The specified state type " + type + " is not valid.";
 				throw new IllegalArgumentException(message);
 		}
 
@@ -789,7 +788,7 @@ public class ATNDeserializer {
 			return new LexerTypeAction(data1);
 
 		default:
-			String message = String.format(Locale.getDefault(), "The specified lexer action type %d is not valid.", type);
+			String message = "The specified lexer action type " + type + " is not valid.";
 			throw new IllegalArgumentException(message);
 		}
 	}

@@ -15,8 +15,6 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.dfa.DFAState;
 import org.antlr.v4.runtime.misc.Interval;
 
-import java.util.Locale;
-
 /** "dup" of ParserInterpreter */
 public class LexerATNSimulator extends ATNSimulator {
 	public static final boolean debug = false;
@@ -142,7 +140,7 @@ public class LexerATNSimulator extends ATNSimulator {
 		ATNState startState = atn.modeToStartState.get(mode);
 
 		if ( debug ) {
-			System.out.format(Locale.getDefault(), "matchATN mode %d start: %s\n", mode, startState);
+			System.out.println("matchATN mode " + mode + " start: " + startState);
 		}
 
 		int old_mode = mode;
@@ -159,7 +157,7 @@ public class LexerATNSimulator extends ATNSimulator {
 		int predict = execATN(input, next);
 
 		if ( debug ) {
-			System.out.format(Locale.getDefault(), "DFA after matchATN: %s\n", decisionToDFA[old_mode].toLexerString());
+			System.out.println("DFA after matchATN: " + decisionToDFA[old_mode].toLexerString());
 		}
 
 		return predict;
@@ -168,7 +166,7 @@ public class LexerATNSimulator extends ATNSimulator {
 	protected int execATN(CharStream input, DFAState ds0) {
 		//System.out.println("enter exec index "+input.index()+" from "+ds0.configs);
 		if ( debug ) {
-			System.out.format(Locale.getDefault(), "start state closure=%s\n", ds0.configs);
+			System.out.println("start state closure=" + ds0.configs);
 		}
 
 		if (ds0.isAcceptState) {
@@ -182,7 +180,7 @@ public class LexerATNSimulator extends ATNSimulator {
 
 		while ( true ) { // while more work
 			if ( debug ) {
-				System.out.format(Locale.getDefault(), "execATN loop starting closure: %s\n", s.configs);
+				System.out.println("execATN loop starting closure: " + s.configs);
 			}
 
 			// As we move src->trg, src->trg, we keep track of the previous trg to
@@ -328,7 +326,7 @@ public class LexerATNSimulator extends ATNSimulator {
 			}
 
 			if ( debug ) {
-				System.out.format(Locale.getDefault(), "testing %s at %s\n", getTokenName(t), c.toString(recog, true));
+				System.out.println("testing " + getTokenName(t) + " at " + c.toString(recog, true));
 			}
 
 			int n = c.state.getNumberOfTransitions();
@@ -357,7 +355,7 @@ public class LexerATNSimulator extends ATNSimulator {
 						  int startIndex, int index, int line, int charPos)
 	{
 		if ( debug ) {
-			System.out.format(Locale.getDefault(), "ACTION %s\n", lexerActionExecutor);
+			System.out.println("ACTION " + lexerActionExecutor);
 		}
 
 		// seek to after last char in token
@@ -411,10 +409,10 @@ public class LexerATNSimulator extends ATNSimulator {
 		if ( config.state instanceof RuleStopState ) {
 			if ( debug ) {
 				if ( recog!=null ) {
-					System.out.format(Locale.getDefault(), "closure at %s rule stop %s\n", recog.getRuleNames()[config.state.ruleIndex], config);
+					System.out.println("closure at " + recog.getRuleNames()[config.state.ruleIndex] + " rule stop " + config);
 				}
 				else {
-					System.out.format(Locale.getDefault(), "closure at rule stop %s\n", config);
+					System.out.println("closure at rule stop " + config);
 				}
 			}
 

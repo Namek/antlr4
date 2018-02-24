@@ -41,6 +41,6 @@ public class Pair<A,B> implements Serializable {
 
 	@Override
 	public String toString() {
-		return String.format("(%s, %s)", a, b);
+		return "(" + a + ", " + b + "%s)";
 	}
 }

@@ -72,11 +72,10 @@ public class DiagnosticErrorListener extends BaseErrorListener {
 			return;
 		}
 
-		String format = "reportAmbiguity d=%s: ambigAlts=%s, input='%s'";
 		String decision = getDecisionDescription(recognizer, dfa);
 		BitSet conflictingAlts = getConflictingAlts(ambigAlts, configs);
 		String text = recognizer.getTokenStream().getText(Interval.of(startIndex, stopIndex));
-		String message = String.format(format, decision, conflictingAlts, text);
+		String message = "reportAmbiguity d=" + decision + ": ambigAlts=" + conflictingAlts + ", input='" + text + "'";
 		recognizer.notifyErrorListeners(message);
 	}
 
@@ -88,10 +87,9 @@ public class DiagnosticErrorListener extends BaseErrorListener {
 											BitSet conflictingAlts,
 											ATNConfigSet configs)
 	{
-		String format = "reportAttemptingFullContext d=%s, input='%s'";
 		String decision = getDecisionDescription(recognizer, dfa);
 		String text = recognizer.getTokenStream().getText(Interval.of(startIndex, stopIndex));
-		String message = String.format(format, decision, text);
+		String message = "reportAttemptingFullContext d=" + decision + ", input='" + text + "'";
 		recognizer.notifyErrorListeners(message);
 	}
 
@@ -103,10 +101,9 @@ public class DiagnosticErrorListener extends BaseErrorListener {
 										 int prediction,
 										 ATNConfigSet configs)
 	{
-		String format = "reportContextSensitivity d=%s, input='%s'";
 		String decision = getDecisionDescription(recognizer, dfa);
 		String text = recognizer.getTokenStream().getText(Interval.of(startIndex, stopIndex));
-		String message = String.format(format, decision, text);
+		String message = "reportContextSensitivity d=" + decision + ", input='" + text + "'";
 		recognizer.notifyErrorListeners(message);
 	}
 
@@ -124,7 +121,7 @@ public class DiagnosticErrorListener extends BaseErrorListener {
 			return String.valueOf(decision);
 		}
 
-		return String.format("%d (%s)", decision, ruleName);
+		return decision + " (" + ruleName + ")";
 	}
 
 	/**

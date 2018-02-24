@@ -9,8 +9,6 @@ import org.antlr.v4.runtime.atn.ATNState;
 import org.antlr.v4.runtime.atn.AbstractPredicateTransition;
 import org.antlr.v4.runtime.atn.PredicateTransition;
 
-import java.util.Locale;
-
 /** A semantic predicate failed during validation.  Validation of predicates
  *  occurs when normally parsing the alternative just like matching a token.
  *  Disambiguating predicate evaluation occurs when we test a predicate during
@@ -69,6 +67,6 @@ public class FailedPredicateException extends RecognitionException {
 			return message;
 		}
 
-		return String.format(Locale.getDefault(), "failed predicate: {%s}?", predicate);
+		return "failed predicate: {" + predicate + "}?";
 	}
 }

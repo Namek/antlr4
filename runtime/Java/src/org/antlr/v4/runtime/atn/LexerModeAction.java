@@ -87,6 +87,6 @@ public final class LexerModeAction implements LexerAction {
 
 	@Override
 	public String toString() {
-		return String.format("mode(%d)", mode);
+		return "mode(" + mode + ")";
 	}
 }

@@ -18,7 +18,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
@@ -348,7 +347,7 @@ public class ATNSerializer {
 					break;
 
 				default:
-					String message = String.format(Locale.getDefault(), "The specified lexer action type %s is not valid.", action.getActionType());
+					String message = "The specified lexer action type " + action.getActionType() + " is not valid.";
 					throw new IllegalArgumentException(message);
 				}
 			}
@@ -420,14 +419,14 @@ public class ATNSerializer {
 		int p = 0;
 		int version = ATNDeserializer.toInt(data[p++]);
 		if (version != ATNDeserializer.SERIALIZED_VERSION) {
-			String reason = String.format("Could not deserialize ATN with version %d (expected %d).", version, ATNDeserializer.SERIALIZED_VERSION);
+			String reason = "Could not deserialize ATN with version " + version + " (expected " + ATNDeserializer.SERIALIZED_VERSION + ").";
 			throw new UnsupportedOperationException(new InvalidClassException(ATN.class.getName(), reason));
 		}
 
 		UUID uuid = ATNDeserializer.toUUID(data, p);
 		p += 8;
 		if (!uuid.equals(ATNDeserializer.SERIALIZED_UUID)) {
-			String reason = String.format(Locale.getDefault(), "Could not deserialize ATN with UUID %s (expected %s).", uuid, ATNDeserializer.SERIALIZED_UUID);
+			String reason = "Could not deserialize ATN with UUID " + uuid + " (expected " + ATNDeserializer.SERIALIZED_UUID + ").";
 			throw new UnsupportedOperationException(new InvalidClassException(ATN.class.getName(), reason));
 		}
 
