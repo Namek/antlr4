@@ -12,12 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
-import java.util.BitSet;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class Utils {
     // Seriously: why isn't this built in to java? ugh!
@@ -202,5 +197,39 @@ public class Utils {
 			}
 		}
 		return n;
+	}
+
+	/**
+	 * Creates a {@code UUID} from the string standard representation as
+	 * described in the {@link #toString} method.
+	 *
+	 * @param  name
+	 *         A string that specifies a {@code UUID}
+	 *
+	 * @return  A {@code UUID} with the specified value
+	 *
+	 * @throws  IllegalArgumentException
+	 *          If name does not conform to the string representation as
+	 *          described in {@link #toString}
+	 *
+	 */
+	public static UUID uuidFromString(String name) {
+		String[] components = name.split("-");
+		if (components.length != 5)
+			throw new IllegalArgumentException("Invalid UUID string: "+name);
+		for (int i=0; i<5; i++)
+			components[i] = "0x"+components[i];
+
+		long mostSigBits = Long.decode(components[0]).longValue();
+		mostSigBits <<= 16;
+		mostSigBits |= Long.decode(components[1]).longValue();
+		mostSigBits <<= 16;
+		mostSigBits |= Long.decode(components[2]).longValue();
+
+		long leastSigBits = Long.decode(components[3]).longValue();
+		leastSigBits <<= 48;
+		leastSigBits |= Long.decode(components[4]).longValue();
+
+		return new UUID(mostSigBits, leastSigBits);
 	}
 }
