@@ -11,12 +11,7 @@ import org.antlr.v4.runtime.atn.ATNSimulator;
 import org.antlr.v4.runtime.atn.ParseInfo;
 import org.antlr.v4.runtime.misc.Utils;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.WeakHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.*;
 
 public abstract class Recognizer<Symbol, ATNInterpreter extends ATNSimulator> {
 	public static final int EOF=-1;
@@ -28,7 +23,7 @@ public abstract class Recognizer<Symbol, ATNInterpreter extends ATNSimulator> {
 
 
 	private List<ANTLRErrorListener> _listeners =
-		new CopyOnWriteArrayList<ANTLRErrorListener>() {{
+		new ArrayList<ANTLRErrorListener>() {{
 			add(ConsoleErrorListener.INSTANCE);
 		}};
 
