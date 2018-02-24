@@ -269,8 +269,8 @@ public class ParserATNSimulator extends ATNSimulator {
 	public static final boolean dfa_debug = false;
 	public static final boolean retry_debug = false;
 
-	/** Just in case this optimization is bad, add an ENV variable to turn it off */
-	public static final boolean TURN_OFF_LR_LOOP_ENTRY_BRANCH_OPT = Boolean.parseBoolean(getSafeEnv("TURN_OFF_LR_LOOP_ENTRY_BRANCH_OPT"));
+	/** Just in case this optimization is bad, turn it off */
+	public static final boolean TURN_OFF_LR_LOOP_ENTRY_BRANCH_OPT = false;
 
 	protected final Parser parser;
 
@@ -2180,15 +2180,5 @@ public class ParserATNSimulator extends ATNSimulator {
 	 */
 	public Parser getParser() {
 		return parser;
-	}
-
-	public static String getSafeEnv(String envName) {
-		try {
-			return System.getenv(envName);
-		}
-		catch(SecurityException e) {
-			// use the default value
-		}
-		return null;
 	}
 }
